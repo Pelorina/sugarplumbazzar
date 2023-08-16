@@ -36,7 +36,7 @@ public class Controller {
         return service.findBYId(id);
     }
 
-    @PutMapping("/resetPassword")
+    @PutMapping("/reset")
     public Response reset(@RequestBody ResetDto resetDto) {
         return service.resetPassword(resetDto);
     }

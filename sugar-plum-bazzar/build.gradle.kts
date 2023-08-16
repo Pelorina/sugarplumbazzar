@@ -22,6 +22,7 @@ java {
 }
 
  dependencies {
+	 implementation("org.apache.httpcomponents:httpclient:4.5.3")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-mail")
 	 implementation ("io.jsonwebtoken:jjwt-impl:0.11.5")
@@ -33,7 +34,8 @@ java {
 	compileOnly("org.projectlombok:lombok")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	 runtimeOnly("com.mysql:mysql-connector-j")
-//	 implementation("com.squareup.okhttp3:okhttp:4.9.1")
+	 implementation ("org.springframework.boot:spring-boot-starter-webflux")
+	 implementation("com.squareup.okhttp3:okhttp:4.9.1")
 	 annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.security:spring-security-test")
