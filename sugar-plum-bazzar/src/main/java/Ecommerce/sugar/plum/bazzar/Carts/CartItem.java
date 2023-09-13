@@ -26,9 +26,9 @@ public class CartItem {
     @JoinColumn(name = "product_id")
     private ProductEntity product;
 
-    @OneToOne
-    @JoinColumn(name = "entity_id")
-    private Ecommerce.sugar.plum.bazzar.Users.Entity user;
+//    @OneToOne
+//    @JoinColumn(name = "entity_id")
+//    private Ecommerce.sugar.plum.bazzar.Users.Entity user;
     private Integer quantity;
     private String productName;
     private double price;

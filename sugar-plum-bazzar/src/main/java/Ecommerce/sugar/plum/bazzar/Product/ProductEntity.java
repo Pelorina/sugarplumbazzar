@@ -23,6 +23,7 @@ public class ProductEntity {
     private String brandName;
     private String category;
     private Double price;
+    private String url;
     private Integer quantity;
     private String uniqueIdentifier;
     @CreationTimestamp

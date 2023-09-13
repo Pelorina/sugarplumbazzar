@@ -1,3 +1,5 @@
+import org.gradle.kotlin.dsl.jar
+
 plugins {
 	java
 	id("org.springframework.boot") version "3.1.2"
@@ -40,7 +42,12 @@ java {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.security:spring-security-test")
 }
-
- tasks.withType<Test> {
-	useJUnitPlatform()
-}
+//
+// tasks.withType<Test> {
+//	useJUnitPlatform()
+//
+tasks.jar{
+	manifest{
+		attributes["Main-Class"] = "com.SugarPlumBazzarApplication"
+	}
+ }

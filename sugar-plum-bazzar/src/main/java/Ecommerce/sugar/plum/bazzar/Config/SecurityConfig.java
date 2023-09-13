@@ -65,13 +65,22 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize ->
                         authorize.requestMatchers(HttpMethod.POST, "/api/register").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
+                                .requestMatchers("/api/verifyAccount/**").permitAll()
                                 .requestMatchers("/cart/add").hasRole("USERS")
                                 .requestMatchers("/product/create").hasRole("ADMIN")
                                 .requestMatchers("/product/search").hasRole("USERS")
                                 .requestMatchers("/cart/remove").hasRole("USERS")
                                 .requestMatchers("/admin/create").permitAll()
                                 .requestMatchers("/api/checkout").hasRole("USERS")
-
+                                .requestMatchers("/admin/brandName").hasRole("ADMIN")
+                                .requestMatchers("/admin/update").hasRole("ADMIN")
+                                .requestMatchers("/admin/reset").hasRole("ADMIN")
+                                .requestMatchers("/product/update").hasRole("ADMIN")
+                                .requestMatchers("/product/id").hasRole("ADMIN")
+                                .requestMatchers("/api/id").hasRole("ADMIN")
+                                .requestMatchers("/api/reset").hasRole("USERS")
+                                .requestMatchers("/api/payment/initializePayment").hasRole("USERS")
+                                .requestMatchers("/api/payment/verifyPayment/{reference}").hasRole("ADMIN")
                                 .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults());

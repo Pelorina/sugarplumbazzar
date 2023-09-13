@@ -18,4 +18,7 @@ public class ResponseUtils {
     public static final String PRODUCT_SUCCESS_UPDATE_MESSAGE=" your product been successfully update";
     public static final String PRODUCT_EXISTS_CODE="008";
     public static final String PRODUCT_EXISTS_MESSAGE="product exists";
+    public static final String PAYSTACK_INITIALIZE_PAY="https://api.paystack.co/transaction/initialize";
+    public static final String PAYSTACK_VERIFY="https://api.paystack.co/transaction/verify/";
+    public static final Integer  STATUS_CODE_OK= 200;
 }

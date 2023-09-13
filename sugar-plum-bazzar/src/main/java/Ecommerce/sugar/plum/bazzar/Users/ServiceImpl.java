@@ -10,6 +10,7 @@ import Ecommerce.sugar.plum.bazzar.Utils.Data;
 import Ecommerce.sugar.plum.bazzar.Utils.Response;
 import Ecommerce.sugar.plum.bazzar.Utils.ResponseUtils;
 import Ecommerce.sugar.plum.bazzar.Utils.Roles;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.mail.MailException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,6 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 @org.springframework.stereotype.Service
+@Slf4j
 public class ServiceImpl implements Service {
     private static final long EXPIRATION_DURATION_MINUTES = 10;
     private final UserRepository userRepository;
@@ -47,7 +49,7 @@ public class ServiceImpl implements Service {
         if (findByEmail) {
             return Response.builder()
                     .responseCode(ResponseUtils.USER_EXISTS_CODE)
-                    .responseMessage(ResponseUtils.USER_CREATED_MESSAGE)
+                    .responseMessage(ResponseUtils.USER_EXISTS_MESSAGE)
                     .data(null)
                     .build();
         }
@@ -57,7 +59,7 @@ public class ServiceImpl implements Service {
 
         Entity register;
         try {
-            // Your existing code for entity creation and saving
+
             Entity create = Entity.builder()
                     .address(request.getAddress())
                     .age(request.getAge())
@@ -83,7 +85,7 @@ public class ServiceImpl implements Service {
                     + "Your username is: " + register.getUsername() + "\n"
                     + "Your referral code is: " + ReferralCode.generateReferralCode() + "\n\n"
                     + "Please click the following link to verify your account:\n"
-                    + "http://localhost:8080/api/verifyAccount/" + verificationToken1 + "\n\n"
+                    + "http://localhost:8080/api/verifyAccount/"+verificationToken1 + "\n\n"
                     + "Thank you for joining us!\n\n"
                     + "Best regards,\n"
                     + "Sugar_Plum_Bazzar";
@@ -99,7 +101,7 @@ public class ServiceImpl implements Service {
             cartRepository.save(cart);
         } catch (MailException e) {
             // Handle email sending failure
-            // e.g., log the error or return an appropriate error response
+
         }
 
         // Return the response after user registration
@@ -186,6 +188,7 @@ public class ServiceImpl implements Service {
                     .build();
         }
         user.setPassword(passwordEncoder.encode(resetDto.getPassword()));
+        user.setUsername(resetDto.getUsername());
         String mailMessage = "A request to change password was sent from your account. Please verify by inputing the code below to " +
                 "\n" + "\n" + generatePasswordResetCode();
 
@@ -208,8 +211,6 @@ public class ServiceImpl implements Service {
     public Entity getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
-
-        // Assuming you have a method to find a user by username in your repository
         return userRepository.findByUsername(username);
     }
 

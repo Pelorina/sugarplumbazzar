@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Builder
 public class InitializePaymentDto {
-
     private BigDecimal amount;
     private String email;
+    private Long id;
 }
