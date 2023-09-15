@@ -26,9 +26,9 @@ public class CartItem {
     @JoinColumn(name = "product_id")
     private ProductEntity product;
 
-//    @OneToOne
-//    @JoinColumn(name = "entity_id")
-//    private Ecommerce.sugar.plum.bazzar.Users.Entity user;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private Ecommerce.sugar.plum.bazzar.Users.Entity user;
     private Integer quantity;
     private String productName;
     private double price;
@@ -36,13 +36,12 @@ public class CartItem {
     private double totalAmount;
 
 
-//    public void nullifyAllFields() {
-//        // Nullify all fields that need to be cleared
-//        this.product = null;
-//        this.quantity = null;
-//        this.cart = null;
-//        this.productName = null;
-//        this.id = null;
-//    }
+    public void reset() {
+        setQuantity(0);
+        setProductName("");
+        setPrice(0.0);
+        setBrandName("");
+        setTotalAmount(0.0);
+    }
 }
 

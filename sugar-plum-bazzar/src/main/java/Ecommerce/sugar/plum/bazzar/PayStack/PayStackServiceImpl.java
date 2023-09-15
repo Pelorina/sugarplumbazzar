@@ -164,7 +164,7 @@ public class PayStackServiceImpl implements  PayStackService {
                     paystackPaymentRepository.save(paymentPaystack);
                 }
 
-                clearCurrentUserCart();
+                clearCurrentUserCart(user);
 
                 for (CartItem cartItem : user.getCart().getItems()) {
                     ProductEntity product = cartItem.getProduct();
@@ -187,24 +187,16 @@ public class PayStackServiceImpl implements  PayStackService {
             throw new RuntimeException(e);
         }
         return paymentVerificationResponse;
+
     }
-    private void clearCurrentUserCart() {
-            String currentUsername = SecurityContextHolder.getContext().getAuthentication().getName();
-            Entity user = userRepository.findByUsername(currentUsername);
-
-            if (user != null && user.getCart() != null) {
-                for (CartItem cartItem : user.getCart().getItems()) {
-                    cartItem.setQuantity(0);
-                    cartItem.setProductName("");
-                    cartItem.setPrice(0.0);
-                    cartItem.setBrandName("");
-                    cartItem.setTotalAmount(0.0);
-                    cartItem.setProduct(null);
-                }
-                cartRepository.save(user.getCart());
+    private void clearCurrentUserCart(Entity user) {
+        if (user != null && user.getCart() != null) {
+            for (CartItem cartItem : user.getCart().getItems()) {
+                cartItem.reset(); // Reset cart item properties
             }
+            cartRepository.save(user.getCart()); // Save the cleared cart
         }
-
+    }
 
     private boolean reduceStockAfterSuccessfulPayment(ProductEntity product, int quantity) {
         int currentStock = product.getQuantity();

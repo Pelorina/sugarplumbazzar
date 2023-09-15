@@ -29,7 +29,9 @@ public class CartService {
         CartItem cartItem = findCartItemByProduct(cart, product);
 
         if (cartItem != null) {
-            cartItem.setQuantity(cartItem.getQuantity() + quantity);
+            int newQuantity = cartItem.getQuantity() + quantity;
+            cartItem.setQuantity(newQuantity);
+            cartItem.setTotalAmount(cartItem.getPrice() * newQuantity);
         } else {
             cartItem = new CartItem();
             cartItem.setProduct(product);
@@ -38,14 +40,14 @@ public class CartService {
             cartItem.setProductName(product.getProductName());
             cartItem.setPrice(product.getPrice());
             cartItem.setBrandName(product.getBrandName());
-            cartItem.setTotalAmount(product.getPrice() *quantity);
+            cartItem.setTotalAmount(product.getPrice() * quantity);
 
 
             // Save the cart item to generate the ID
             cartItemRepository.save(cartItem);
-
-            cart.getItems().add(cartItem);
         }
+        cart.getItems().add(cartItem);
+
 
         userRepository.save(user);
 
