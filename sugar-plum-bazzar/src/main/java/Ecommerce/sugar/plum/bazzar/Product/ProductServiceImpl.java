@@ -25,6 +25,7 @@ public class ProductServiceImpl implements ProductService {
         this.merchantRepository = merchantRepository;
     }
 
+//Must be a merchant
     @Override
     public Response createProduct(ProductRequest request) {
         Optional<MerchantEntity> optionalMerchant = merchantRepository.findById(request.getMerchant_id());

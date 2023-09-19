@@ -180,7 +180,7 @@ public class MerchantServiceImpl implements MerchantService {
 
 
     }
-
+// MUTABLE object
     public static String generatePasswordResetCode() {
         SecureRandom random = new SecureRandom();
         StringBuilder codeBuilder = new StringBuilder();
@@ -201,7 +201,6 @@ public class MerchantServiceImpl implements MerchantService {
 
         public static String generateVerificationCode() {
             StringBuilder verificationCode = new StringBuilder();
-
             SecureRandom random = new SecureRandom();
             for (int i = 0; i < 4; i++) {
                 char randomDigit = DIGITS.charAt(random.nextInt(DIGITS.length()));

@@ -198,9 +198,6 @@ public class ServiceImpl implements Service {
                 .messageBody(mailMessage)
                 .build();
         emailService.sendSimpleEmail(emailDetails);
-
-
-
         userRepository.save(user);
         return Response.builder()
                 .responseCode(ResponseUtils.SUCCESSFULLY_RESET_PASSWORD_CODE)

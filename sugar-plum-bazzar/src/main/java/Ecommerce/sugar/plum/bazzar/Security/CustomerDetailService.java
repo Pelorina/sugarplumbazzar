@@ -42,7 +42,7 @@ public class CustomerDetailService implements UserDetailsService {
         if (merchant != null) {
             authorities.add(new SimpleGrantedAuthority(Roles.ROLE_ADMIN.name()));
         }
-
+//   tenary operator
         String password = (user != null) ? user.getPassword() : merchant.getPassword();
 
         // Use UserDetails interface instead of concrete User class

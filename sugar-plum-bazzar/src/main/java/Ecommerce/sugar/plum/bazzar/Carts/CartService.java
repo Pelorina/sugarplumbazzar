@@ -62,11 +62,18 @@ public class CartService {
         }
 
         if (cartItem.getQuantity() > quantity) {
+            // Calculate the price per unit of the product
+            double pricePerUnit = cartItem.getProduct().getPrice();
+
+            // Update the quantity and total price
             cartItem.setQuantity(cartItem.getQuantity() - quantity);
+            cartItem.setTotalAmount(pricePerUnit * cartItem.getQuantity());
         } else {
+            // Remove the item from the cart and update the total price
             cart.getItems().remove(cartItem);
             cartItem.setCart(null);
         }
+
         userRepository.save(user);
 
         return ResponseEntity.ok("Product removed from cart.");
@@ -74,7 +81,8 @@ public class CartService {
 
 
 
-        private CartItem findCartItemByProduct (Cart cart, ProductEntity product){
+
+    private CartItem findCartItemByProduct (Cart cart, ProductEntity product){
             return cart.getItems().stream()
                     .filter(item -> item.getProduct().equals(product))
                     .findFirst()

@@ -21,11 +21,11 @@ public class CartItem {
     @ManyToOne
     @JoinColumn(name = "cart_id")
     private Cart cart;
-
+//many product
     @ManyToOne
     @JoinColumn(name = "product_id")
     private ProductEntity product;
-
+//one user
     @OneToOne
     @JoinColumn(name = "user_id")
     private Ecommerce.sugar.plum.bazzar.Users.Entity user;
